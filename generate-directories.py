@@ -21,7 +21,7 @@ def printChildren(category, parentstring):
     if parentstring == "":
         parentstring = category['id']
     else:
-        parentstring = parentstring + '/' + category['id']
+        parentstring = f'{parentstring}/' + category['id']
 
     slugs.add(parentstring)
 
@@ -39,7 +39,7 @@ for category in data['content']:
     except:
         continue
 
-    for child in category['children']:
+    for _ in category['children']:
         printChildren(category, "")
 
 # change dirs to `templates`
@@ -51,8 +51,8 @@ for slug in sorted(slugs):
         os.mkdir(slug)
 
         # Make sure we have a .gitkeep in the directory
-        gitkeep = "{}/.gitkeep".format(slug)
-        
+        gitkeep = f"{slug}/.gitkeep"
+
         Path(gitkeep).touch()
 
     except OSError as e:
